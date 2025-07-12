@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Task } from '../types/Task';
 import { getTasks } from '../services/taskService';
+import { Link } from 'react-router-dom';
 
 export default function TaskList() {
 	const [tasks, setTasks] = useState<Task[]>([]);
@@ -22,10 +23,10 @@ export default function TaskList() {
 
 	return (
 		<div>
-		<h2>Task List Componente</h2>
-		<p>Prueba de TaskList.</p>
+		<Link to="/tasks/new" className="btn btn-primary mb-3">Agregar nueva tarea</Link>
+
 		{tasks.length === 0 ? (
-        <p>No tasks found.</p>
+        <p>No hay tareas.</p>
       	) : (
 			<ul className="list-group">
 			{tasks.map((task) => (
