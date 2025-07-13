@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Task } from '../types/Task';
-import { getTasks } from '../services/taskService';
+import { deleteTask, getTasks } from '../services/taskService';
 import { Link } from 'react-router-dom';
 import TaskItem from './TaskItem';
 
@@ -11,9 +11,16 @@ export default function TaskList() {
     	try {
 			const data = await getTasks();
 			setTasks(data);
-			console.log(data);
+			//console.log(data);
 		} catch (error) {
 			console.error(`Error loading tasks: ${error}`);
+		}
+	};
+
+	const handleDelete = async (id: string) => {
+		if (confirm('Quiere eliminar la tarea?')) {
+			await deleteTask(id);
+			loadTasks();
 		}
 	};
 
@@ -31,7 +38,7 @@ export default function TaskList() {
       	) : (
 			<ul className="list-group">
 			{tasks.map((task) => (
-				<TaskItem key={task.id} task={task}/>
+				<TaskItem key={task.id} task={task} onDelete={handleDelete}/>
 			))}
 			</ul>
       	)}
