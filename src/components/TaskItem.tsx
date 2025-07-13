@@ -1,12 +1,7 @@
-import { useEffect } from 'react';
 import type { TaskItemProps } from '../types/TaskItemProps';
 import { Link } from 'react-router-dom';
 
 export default function TaskItem({ task, onDelete }: TaskItemProps) {
-
-    useEffect(() => {
-        //console.log('TaskItem');
-    }, []);
 
     return (
         <li className="list-group-item">
@@ -17,7 +12,7 @@ export default function TaskItem({ task, onDelete }: TaskItemProps) {
                 <span className={`badge ${task.completed ? 'bg-success' : 'bg-secondary'} me-2`}>
                 {task.completed ? 'Hecho' : 'Pendiente'}
                 </span> 
-                <Link to={`/tasks/${task.id}/edit`} className="btn btn-sm btn-secondary me-2">
+                <Link to={`/tasks/${task.id}/edit`} className="btn btn-sm btn-dark me-2">
                 Editar
                 </Link>               
                 <button onClick={() => onDelete(task.id)} className="btn btn-sm btn-danger">
